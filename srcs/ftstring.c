@@ -62,3 +62,8 @@ int ft_atoi(char *str)
     }
     return number * sign;
 }
+
+void ft_clearscreen(void)
+{
+    write(STDOUT_FILENO, "\033[2J\033[H", 7);
+}
