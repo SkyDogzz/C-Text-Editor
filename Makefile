@@ -3,7 +3,7 @@ NAME = bin/text-editor
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = srcs/main.c
+SRCS = srcs/main.c srcs/ftstring.c
 
 OBJS_DIR = objs
 BIN_DIR = bin
