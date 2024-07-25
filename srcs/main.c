@@ -1,10 +1,13 @@
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include "ft_string.h"
+#include "ft_file.h"
 
 void display_menu(void);
 void main_loop(void);
 void create_file(void);
+void open_file(void);
 
 int main(int argc, char **argv)
 {
@@ -26,10 +29,13 @@ void main_loop(void)
         number = read_number();
         ft_clearscreen();
         if(number == 1)
+        {
             ft_putstr("Open file: TODO\n");
+            open_file();
+        }
         else if(number == 2)
         {
-            ft_putstr("Create file: TODO\n");
+            ft_putstr("Create file:\n");
             create_file();
         }
         else if(number == 3)
@@ -69,5 +75,30 @@ void create_file(void)
     ft_putstr("File \"");
     ft_putstr(buffer);
     ft_putstr("\" created.\n");
+    return;
+}
+
+void open_file(void)
+{
+    char *buffer;
+    char *line;
+    int fd;
+
+    buffer = read_string();
+    fd = open(buffer, O_RDONLY);
+    if(fd == -1)
+    {
+        ft_putstr("Error opening file\n");
+        return;
+    }
+    line = (char *)malloc(sizeof(char) * (256 + 1));
+    if(!line)
+    {
+        ft_putstr("Memory allocation failed.\n");
+        return;
+    }
+    while(get_line(line, sizeof(line), fd))
+        ft_putstr(line);
+    close(fd);
     return;
 }
