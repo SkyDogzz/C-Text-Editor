@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <fcntl.h>
-#include "ftstring.h"
-#include <stdio.h>
+#include "ft_string.h"
 
 void display_menu(void);
 void main_loop(void);

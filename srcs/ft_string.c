@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ftstring.h"
+#include "ft_string.h"
 
 int ft_strlen(char *str)
 {
