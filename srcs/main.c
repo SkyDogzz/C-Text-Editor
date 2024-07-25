@@ -83,6 +83,7 @@ void open_file(void)
     char *buffer;
     char *line;
     int fd;
+    int count = 1;
 
     buffer = read_string();
     fd = open(buffer, O_RDONLY);
@@ -91,14 +92,19 @@ void open_file(void)
         ft_putstr("Error opening file\n");
         return;
     }
-    line = (char *)malloc(sizeof(char) * (256 + 1));
+    line = (char *)malloc(sizeof(char) * LINE_BUFFER_SIZE);
     if(!line)
     {
         ft_putstr("Memory allocation failed.\n");
         return;
     }
-    while(get_line(line, sizeof(line), fd))
+    while(get_line(line, LINE_BUFFER_SIZE, fd))
+    {
+        ft_putnbr_min(count, 3, ' ');
+        write(1, ": ", 2);
         ft_putstr(line);
+        count++;
+    }
     close(fd);
     return;
 }

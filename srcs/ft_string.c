@@ -60,11 +60,11 @@ int ft_atoi(char *str)
     int number = 0;
     int sign = 1;
     while(ft_isspace(*str))
-    str++;
+        str++;
     if(*str == '-')
     {
         sign = -1;
-       str++;
+        str++;
     }
     else if(*str == '+')
         str++;
@@ -80,4 +80,49 @@ int ft_atoi(char *str)
 void ft_clearscreen(void)
 {
     write(STDOUT_FILENO, "\033[2J\033[H", 7);
+}
+
+void ft_putnbr(int nbr)
+{
+    char digits;
+
+    if(nbr == -2147483648)
+        write(1, "-2147483648", 11);
+    if(nbr < 0)
+    {
+        write(1, "-", 1);
+        nbr = -nbr;
+    }
+    if(nbr / 10 > 0)
+    {
+        ft_putnbr(nbr / 10);
+        digits = (nbr % 10) + '0';
+        write(1, &digits, 1);
+    }
+    else
+    {
+        digits = nbr + '0';
+        write(1, &digits, 1);
+    }
+}
+
+void ft_putnbr_min(int nbr, int min, char c)
+{
+    int length = 0;
+    int temp = nbr;
+    while(temp)
+    {
+        length++;
+        temp /= 10;
+    }
+    if(nbr == 0)
+        length = 1;
+    if(nbr < 0)
+        length++;
+    ft_putnbr(nbr);
+    while(min > length)
+    {
+        write(1, &c, 1);
+        length++;
+    }
 }
