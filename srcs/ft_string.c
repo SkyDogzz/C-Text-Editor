@@ -126,3 +126,12 @@ void ft_putnbr_min(int nbr, int min, char c)
         length++;
     }
 }
+
+void ft_strcpy(char *dest, char *src)
+{
+    while(*src)
+    {
+        *dest++ = *src++;
+    }
+    *dest = '\0';
+}

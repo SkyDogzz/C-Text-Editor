@@ -9,6 +9,7 @@ int ft_atoi(char *str);
 void ft_clearscreen(void);
 void ft_putnbr(int nbr);
 void ft_putnbr_min(int nbr, int min, char c);
+void ft_strcpy(char *dest, char *src);
 
 # define NUMBER_BUFFER_SIZE 32
 # define FILENAME_BUFFER_SIZE 32
