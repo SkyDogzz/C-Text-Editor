@@ -30,9 +30,9 @@ void main_loop(void)
         else if(number == 2)
         {
             ft_putstr("Create file: TODO\n");
-  create_file();
+            create_file();
         }
-                else if(number == 3)
+        else if(number == 3)
             ft_putstr("Edit file: TODO\n");
         else if(number == 4)
             ft_putstr("Save file: TODO\n");
@@ -59,8 +59,8 @@ void create_file(void)
     int fd;
 
     buffer = read_string();
-    fd = open(buffer, O_CREAT);
-    if(!fd)
+    fd = open(buffer, O_CREAT | O_EXCL, 0644);
+    if(fd == -1)
     {
         ft_putstr("Error creating file.\n");
         return;
