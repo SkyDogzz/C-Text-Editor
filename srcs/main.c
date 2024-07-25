@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "ft_string.h"
 #include "ft_file.h"
+#include "ft_buffer.h"
 
 void display_menu(void);
 void main_loop(void);
@@ -58,6 +59,7 @@ void create_file(void)
 {
     char *buffer;
     int fd;
+    char c;
 
     ft_putstr("Create file: ");
     buffer = read_string();
@@ -71,8 +73,10 @@ void create_file(void)
     ft_putstr("File \"");
     ft_putstr(buffer);
     ft_putstr("\" created.\n");
-    ft_putstr("Enter to go next.\n");
-    read_string();
+    ft_putstr("Press any key to continue.\n");
+    disable_buffering();
+    read(STDIN_FILENO, &c, 1);
+    enable_buffering();
     return;
 }
 
@@ -82,6 +86,7 @@ void open_file(void)
     char *line;
     int fd;
     int count = 1;
+    char c;
 
     ft_putstr("Open file: ");
     buffer = read_string();
@@ -106,7 +111,9 @@ void open_file(void)
         count++;
     }
     close(fd);
-    ft_putstr("Enter to go next.\n");
-    read_string();
+    ft_putstr("Press any key to continue.\n");
+    disable_buffering();
+    read(STDIN_FILENO, &c, 1);
+    enable_buffering();
     return;
 }
