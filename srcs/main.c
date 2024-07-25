@@ -25,19 +25,14 @@ void main_loop(void)
     ft_clearscreen();
     while(1)
     {
+        ft_clearscreen();
         display_menu();
         number = read_number();
         ft_clearscreen();
         if(number == 1)
-        {
-            ft_putstr("Open file: TODO\n");
             open_file();
-        }
         else if(number == 2)
-        {
-            ft_putstr("Create file:\n");
             create_file();
-        }
         else if(number == 3)
             ft_putstr("Edit file: TODO\n");
         else if(number == 4)
@@ -64,6 +59,7 @@ void create_file(void)
     char *buffer;
     int fd;
 
+    ft_putstr("Create file: ");
     buffer = read_string();
     fd = open(buffer, O_CREAT | O_EXCL, 0644);
     if(fd == -1)
@@ -75,6 +71,8 @@ void create_file(void)
     ft_putstr("File \"");
     ft_putstr(buffer);
     ft_putstr("\" created.\n");
+    ft_putstr("Enter to go next.\n");
+    read_string();
     return;
 }
 
@@ -85,10 +83,12 @@ void open_file(void)
     int fd;
     int count = 1;
 
+    ft_putstr("Open file: ");
     buffer = read_string();
     fd = open(buffer, O_RDONLY);
     if(fd == -1)
     {
+        ft_clearscreen();
         ft_putstr("Error opening file\n");
         return;
     }
@@ -101,10 +101,12 @@ void open_file(void)
     while(get_line(line, LINE_BUFFER_SIZE, fd))
     {
         ft_putnbr_min(count, 3, ' ');
-        write(1, ": ", 2);
+        ft_putstr(": ");
         ft_putstr(line);
         count++;
     }
     close(fd);
+    ft_putstr("Enter to go next.\n");
+    read_string();
     return;
 }
