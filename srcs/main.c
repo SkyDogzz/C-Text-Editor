@@ -1,8 +1,11 @@
 #include <unistd.h>
+#include <fcntl.h>
 #include "ftstring.h"
+#include <stdio.h>
 
 void display_menu(void);
 void main_loop(void);
+void create_file(void);
 
 int main(int argc, char **argv)
 {
@@ -17,6 +20,7 @@ void main_loop(void)
 {
     int number;
 
+    ft_clearscreen();
     while(1)
     {
         display_menu();
@@ -25,8 +29,11 @@ void main_loop(void)
         if(number == 1)
             ft_putstr("Open file: TODO\n");
         else if(number == 2)
+        {
             ft_putstr("Create file: TODO\n");
-        else if(number == 3)
+  create_file();
+        }
+                else if(number == 3)
             ft_putstr("Edit file: TODO\n");
         else if(number == 4)
             ft_putstr("Save file: TODO\n");
@@ -45,4 +52,23 @@ void display_menu(void)
     ft_putstr("3. Edit File\n");
     ft_putstr("4. Save File\n");
     ft_putstr("5. Exit\n");
+}
+
+void create_file(void)
+{
+    char *buffer;
+    int fd;
+
+    buffer = read_string();
+    fd = open(buffer, O_CREAT);
+    if(!fd)
+    {
+        ft_putstr("Error creating file.\n");
+        return;
+    }
+    close(fd);
+    ft_putstr("File \"");
+    ft_putstr(buffer);
+    ft_putstr("\" created.\n");
+    return;
 }

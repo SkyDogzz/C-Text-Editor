@@ -27,6 +27,20 @@ int read_number(void)
     return ft_atoi(buffer);
 }
 
+char *read_string(void)
+{
+    char *buffer;
+
+    buffer = (char *)malloc(sizeof(char) * (FILENAME_BUFFER_SIZE + 1));
+
+    int bytes_read = read(STDIN_FILENO, buffer, FILENAME_BUFFER_SIZE);
+    if(bytes_read <= 0)
+        return 0;
+    buffer[bytes_read - 1] = '\0';
+
+    return buffer;
+}
+
 int ft_isspace(char c)
 {
     if(c == ' ' || (c >= 11 && c <= 15))
